@@ -1,49 +1,42 @@
-﻿using ExtensibilityMVC.LoggerInfo;
+﻿using ExtensibilityMVC.CustomActionResults;
+using ExtensibilityMVC.LoggerInfo;
 using ExtensibilityMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
 
 namespace ExtensibilityMVC.Controllers
 {
-    public class HomeController : Controller
+    public class XmlController : Controller
     {
-                
         IRequestLogger logger;
         /// <summary>
         /// The Constructor with the Logger parameter. 
         /// </summary>
         /// <param name="log"></param>
-        public HomeController(IRequestLogger log)
+        public XmlController(IRequestLogger log)
         {
             logger = log;
         }
 
-        public HomeController()
+        public XmlController()
         {
             logger = new RequestLogger();
         }
 
-        public ActionResult Index()
+
+        [HttpGet]
+        public XmlActionResult GetXmlData()
         {
             LogInfo();
-            return View();
-        }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            System.Xml.XmlTextReader reader =
+              new System.Xml.XmlTextReader(Server.MapPath("~/Book.xml"));
+            var xml = XElement.Load(reader);
+            return new XmlActionResult(xml.ToString(), "book.xml");
         }
 
         private void LogInfo()

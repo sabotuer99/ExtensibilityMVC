@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{89C4AAA8-0743-45D5-8857-9EBA0510A047}</ProjectGuid>
+    <ProjectGuid>{455A4484-C7D2-45D3-AEDF-052361401B94}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExtensibilityMVC</RootNamespace>
-    <AssemblyName>ExtensibilityMVC</AssemblyName>
+    <RootNamespace>CustomModelBinder</RootNamespace>
+    <AssemblyName>CustomModelBinder</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -43,8 +43,6 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -161,73 +159,28 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\EmployeeInfoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomeCustomBinder.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\XmlController.cs" />
-    <Compile Include="CustomActionResults\XmlActionResult.cs" />
-    <Compile Include="CustomControllerFactoryRepository\CCustomControllerFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="LoggerInfo\LoggerInfo.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\DataClasses.cs" />
-    <Compile Include="Models\ExtensibilityMVC.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ExtensibilityMVC.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ExtensibilityMVC.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ExtensibilityMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ExtensibilityMVC.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ExtensibilityMVC.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Models\HomePageModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\LoggerInformation.cs">
-      <DependentUpon>ExtensibilityMVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Database1.mdf" />
-    <Content Include="App_Data\Database1_log.ldf">
-      <DependentUpon>Database1.mdf</DependentUpon>
-    </Content>
-    <Content Include="Book.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Controllers.xml" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\ExtensibilityMVC.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ExtensibilityMVC.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ExtensibilityMVC.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ExtensibilityMVC.edmx</DependentUpon>
-      <LastGenOutput>ExtensibilityMVC.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ExtensibilityMVC.edmx.diagram">
-      <DependentUpon>ExtensibilityMVC.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\ExtensibilityMVC.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ExtensibilityMVC.edmx</DependentUpon>
-      <LastGenOutput>ExtensibilityMVC.cs</LastGenOutput>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -277,8 +230,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\EmployeeInfo\" />
-    <Folder Include="Views\Xml\" />
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -286,9 +238,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -306,9 +255,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>58463</DevelopmentServerPort>
+          <DevelopmentServerPort>61680</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58463/</IISUrl>
+          <IISUrl>http://localhost:61680/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

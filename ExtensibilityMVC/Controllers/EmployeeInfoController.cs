@@ -1,51 +1,44 @@
 ﻿using ExtensibilityMVC.LoggerInfo;
 using ExtensibilityMVC.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ExtensibilityMVC.Controllers
 {
-    public class HomeController : Controller
+    public class EmployeeInfoController : Controller
     {
-                
+        DataAccess objDs;
+        List<EmployeeInfo> filteredEmps;
         IRequestLogger logger;
         /// <summary>
         /// The Constructor with the Logger parameter. 
         /// </summary>
         /// <param name="log"></param>
-        public HomeController(IRequestLogger log)
+        public EmployeeInfoController(IRequestLogger log)
         {
+            objDs = new DataAccess();
             logger = log;
         }
 
-        public HomeController()
+        public EmployeeInfoController()
         {
+            objDs = new DataAccess();
             logger = new RequestLogger();
         }
-
-        public ActionResult Index()
+        //
+        // GET: /EmployeeInfo/
+        public JsonResult Index()
         {
             LogInfo();
-            return View();
+            var Emps = from e in objDs.GetEmps()
+                       select e;
+            filteredEmps = Emps.ToList();
+            return Json(filteredEmps, JsonRequestBehavior.AllowGet);
         }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
+        /// <summary>
+        /// Private method for storing the Loggin information 
+        /// </summary>
         private void LogInfo()
         {
             LoggerInformation logInfo = new LoggerInformation();
