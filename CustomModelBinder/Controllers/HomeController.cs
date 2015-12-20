@@ -15,8 +15,9 @@ namespace CustomModelBinder.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index([ModelBinder(typeof(HomeCustomBinder))] HomePageModels home)
-        {
+        public ActionResult Index(HomePageModels home) //[ModelBinder(typeof(HomeCustomBinder))] 
+        { 
+            // do stuff
             if (ModelState.IsValid)
             {
                 ViewBag.Title = home.Title;

@@ -19,6 +19,7 @@ namespace CustomModelBinder
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            //register custom model binder
             ModelBinders.Binders.Add(typeof(HomePageModels), new HomeCustomBinder());
         }
     }
