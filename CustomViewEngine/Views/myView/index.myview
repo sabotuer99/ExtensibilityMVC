@@ -1,0 +1,7 @@
+﻿<html>
+<head>
+             <title>Index MyView </title>
+</head>
+<body>{message}
+</body>
+</html>

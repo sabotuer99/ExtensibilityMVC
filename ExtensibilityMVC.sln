@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensibilityMVC", "Extensi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModelBinder", "CustomModelBinder\CustomModelBinder.csproj", "{455A4484-C7D2-45D3-AEDF-052361401B94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomViewEngine", "CustomViewEngine\CustomViewEngine.csproj", "{DD7EEBDB-B484-4E1A-A62E-0327E6910B28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{455A4484-C7D2-45D3-AEDF-052361401B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{455A4484-C7D2-45D3-AEDF-052361401B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{455A4484-C7D2-45D3-AEDF-052361401B94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD7EEBDB-B484-4E1A-A62E-0327E6910B28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD7EEBDB-B484-4E1A-A62E-0327E6910B28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD7EEBDB-B484-4E1A-A62E-0327E6910B28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD7EEBDB-B484-4E1A-A62E-0327E6910B28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
