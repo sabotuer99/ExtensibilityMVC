@@ -38,7 +38,8 @@ namespace CustomViewEngine.ViewEngine
 
             string contents = sb.ToString();
 
-            contents = Regex.Replace(contents, "</body>", "<p>DEBUG INFO:</p><p>" + Environment.StackTrace + "</p></body>");
+            contents = Regex.Replace(contents, "</body>", "<p>DEBUG INFO:</p><p>" + 
+                Environment.StackTrace + "</p></body>");
 
             writer.Write(contents);
             writer.Flush();
