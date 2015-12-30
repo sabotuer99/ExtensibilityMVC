@@ -14,9 +14,12 @@ namespace CustomRouteHandler
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapMvcAttributeRoutes();
+
             routes.Add(new Route(
                 url: "AspCompat/{controller}/{action}",
-                defaults: new RouteValueDictionary(new { controller = "Home", action = "ThreadState" }),
+                defaults: new RouteValueDictionary(
+                    new { controller = "Home", action = "ThreadState" }),
                 routeHandler: new AspCompatHandler()));
 
             //routes.MapRoute(
@@ -26,14 +29,37 @@ namespace CustomRouteHandler
             //).RouteHandler = new AspCompatHandler();
 
             routes.MapRoute(
+                name: "noram",
+                url: "{controller}/Index/{id}",
+                defaults: new { controller = "Home", action = "noram"},
+                constraints: new { id = "(us|ca)" }
+            );
+
+            routes.MapRoute(
+                name: "europe",
+                url: "{controller}/Index/{id}",
+                defaults: new { controller = "Home", action = "europe"},
+                constraints: new EuropeConstraint()
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", 
+                    action = "Index", id = UrlParameter.Optional}
             );
-            
+        }
+    }
 
+    public class EuropeConstraint : IRouteConstraint
+    {
+        public bool Match(HttpContextBase httpContext, Route route, string parameterName,
+        RouteValueDictionary values, RouteDirection routeDirection)
+        {
+            List<string> vals = new List<string>(){"uk","de","es","it","fr","be","nl"};
+            string id = (string)values["id"];
 
-
+            return vals.Contains(id);
         }
     }
 }
